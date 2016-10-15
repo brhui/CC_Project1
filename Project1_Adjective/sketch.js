@@ -1,4 +1,11 @@
-// The ADJECTIVE is "WHIMSICAL"
+/* The ADJECTIVE is "WHIMSICAL"
+
+  CONTROLS:
+    q = Make random triangles appear (one vertex tied to mouse location)
+    w = Make two circle appear (shapes tied to mouse location)
+    a = Make a circle and square appear (shapes tied to mouse location)
+    s = Makes four triangles appear (one vertex tied to mouse location)
+    d = Makes two squares appear and rotates around (0,0) */
 
 // Square values and speed
 var rectX = -50;
@@ -149,5 +156,5 @@ function pinwheel(pinX, pinY, pinCol) {
   var y = pinY;
   noStroke();
   fill(pinCol);
-  triangle(x, y, x + 100, y, x + 50, y + 50);
+  triangle(x, y, x + 150, y, x + 50, y + 50);
 }
