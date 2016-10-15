@@ -9,7 +9,7 @@ var speed = 1;
 var crimson, emerald, lilac, ocean
 
 function setup() {
-  createCanvas(600, 600);
+  createCanvas(500, 500);
   crimson = color(193, 39, 45);
   emerald = color(11, 211, 11);
   lilac = color(188, 131, 198);
@@ -19,7 +19,7 @@ function setup() {
 function draw() {
   background(0);
 
-  // These triangles form a pinwheel of sorts and are a function of triShape and move according to mouseX and mouseY. 
+  // These triangles are a function of pinwheel and move according to mouseX and mouseY. 
   push();
   translate(width / 2, height / 2);
   rotate(mouseY / 100);
@@ -41,11 +41,11 @@ function draw() {
   pinwheel(0, 0, lilac);
   pop();
 
-  // Pressing the W key draws a circle at mouse location
+  // Pressing the W key draws a circle at mouse location that changes change according to mouse location.
   if (key == 'w' || key == 'W') {
     stroke(lilac);
     noFill();
-    ellipse(mouseX, mouseY, 20, 20);
+    ellipse(mouseX, mouseY, mouseX+1, mouseY+1);
   }
   
   // Pressing the S key draws the third vertex of the triangle at the mouse location
@@ -87,7 +87,7 @@ function draw() {
   rect(rectX, rectY, 50, 50);
 
   // Matrix transformation for bottom square
-  translate(0, 550)
+  translate(0, 450)
   rect(rectX, rectY, 50, 50);
 
   // If rectX is greater than the width or less than -50, change direction
