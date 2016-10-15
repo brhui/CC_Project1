@@ -76,7 +76,6 @@ function draw() {
     pop();
   }
 
-
   // Moving Rectangle from side to side
   rectX += speed;
   rectMode(CORNER);
