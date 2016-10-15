@@ -8,16 +8,32 @@ var speed = 1;
 // Color variables for pinwheel function
 var crimson, emerald, lilac, ocean
 
+// Array for circle size across the board
+var ellipSize = [60, 50, 40, 30, 20, 10];
+var ellipCol = [255, 225, 195, 165, 135, 105];
+
 function setup() {
   createCanvas(500, 500);
   crimson = color(193, 39, 45);
   emerald = color(11, 211, 11);
   lilac = color(188, 131, 198);
   ocean = color(85, 138, 255);
+  strokeWeight(3);
+  noCursor();
 }
 
 function draw() {
   background(0);
+
+  // Row of circles that move according to mouseY
+  for (var i = 0; i < 6; i++) {
+    push();
+    stroke(ellipCol[i])
+    noFill();
+    rotate(mouseY / 400);
+    ellipse(i * 100 + 50, height / 4, ellipSize[i], ellipSize[i])
+    pop();
+  }
 
   // These triangles are a function of pinwheel and move according to mouseX and mouseY. 
   push();
@@ -41,46 +57,64 @@ function draw() {
   pinwheel(0, 0, lilac);
   pop();
 
-  // Pressing the W key draws a circle at mouse location that changes change according to mouse location.
+  // Pressing the Q key draws triangles randomly between (0,0) and (200,200) with one point being the mouse location
+  if (key == 'q' || key == 'Q') {
+    stroke(247, 247, 30);
+    noFill();
+    triangle(mouseX, mouseY, random(200), random(200), random(200), random(200));
+  }
+
+  // Pressing the W key draws two circles at mouse location that changes change according to mouse location.
   if (key == 'w' || key == 'W') {
     stroke(lilac);
     noFill();
-    ellipse(mouseX, mouseY, mouseX+1, mouseY+1);
+    ellipse(mouseX, mouseY, mouseX + 1, mouseY + 1);
+    push();
+    translate(-100, -150);
+    ellipse(mouseX, mouseY, mouseX - 1, mouseY - 1);
+    pop();
   }
-  
-  // Pressing the S key draws the third vertex of the triangle at the mouse location
+
+  // Pressing the S key draws four triangles with the third vertex of the triangles at the mouse location
   if (key == 's' || key == 'S') {
     stroke(crimson);
     noFill();
-    triangle(mouseX, mouseY, 20, 20, 20, 40);
+    triangle(mouseX, mouseY, 50, 50, 50, 100);
+    triangle(mouseX, mouseY, 450, 450, 450, 320)
+    triangle(mouseX, mouseY, 450, 450, 450, 100);
+    triangle(mouseX, mouseY, 50, 50, 50, 320)
   }
-  
-  // Pressing the A key draws a circle translated 40 to the right and 40 down from the mouse location that also resizes according to where the mouse is.
+
+  // Pressing the A key draws a circle and a rectangle translated from the mouse location that also resizes according to where the mouse is.
   if (key == 'a' || key == 'A') {
     stroke(ocean);
     noFill();
     push();
     translate(40, 40);
     ellipse(mouseX, mouseY, mouseX + 1, mouseX + 1);
+    translate(-100, 20);
+    rect(mouseX, mouseY, mouseX + 1, mouseX + 1);
     pop();
   }
-  
-  // Pressing the D key draws a rectangle that rotates around (0,0) and is affected by mouse location.
+
+  // Pressing the D key draws two rectangle that rotates around (0,0) and is affected by mouse location.
   if (key == 'd' || key == 'D') {
     stroke(emerald);
     noFill();
     push();
-    rotate(mouseY/70);
+    rotate(mouseY / 70);
     rectMode(CENTER);
+    rect(mouseX, mouseY, 100, 100);
+    translate(-100, -100)
     rect(mouseX, mouseY, 100, 100);
     pop();
   }
 
   // Moving Rectangle from side to side
   rectX += speed;
-  rectMode(CORNER);
 
   // Top square
+  rectMode(CORNER);
   noStroke();
   fill(rectX / 2, random(255), random(255));
   rect(rectX, rectY, 50, 50);
