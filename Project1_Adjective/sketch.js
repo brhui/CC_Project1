@@ -12,6 +12,10 @@ var crimson, emerald, lilac, ocean
 var ellipSize = [60, 50, 40, 30, 20, 10];
 var ellipCol = [255, 225, 195, 165, 135, 105];
 
+// Array for square values down the board
+var rectSize = [65, 55, 45, 35, 25, 15];
+var rectCol = [245, 215, 185, 155, 125, 95];
+
 function setup() {
   createCanvas(500, 500);
   crimson = color(193, 39, 45);
@@ -28,33 +32,43 @@ function draw() {
   // Row of circles that move according to mouseY
   for (var i = 0; i < 6; i++) {
     push();
-    stroke(ellipCol[i])
+    stroke(ellipCol[i]);
     noFill();
     rotate(mouseY / 400);
-    ellipse(i * 100 + 50, height / 4, ellipSize[i], ellipSize[i])
+    ellipse(i * 100 + 50, height / 4, ellipSize[i], ellipSize[i]);
+    pop();
+  }
+  
+  for (var u = 0; u < 6; u++) {
+    push();
+    stroke(rectCol[u]);
+    noFill();
+    scale(mouseX/300);
+    rotate(mouseX/300)
+    rectMode(CENTER);
+    rect(375, u * 100 - 50, rectSize[u], rectSize[u]);
     pop();
   }
 
   // These triangles are a function of pinwheel and move according to mouseX and mouseY. 
   push();
   translate(width / 2, height / 2);
+  push();
   rotate(mouseY / 100);
   pinwheel(0, 0, crimson);
   pop();
   push();
-  translate(width / 2, height / 2);
   rotate(mouseY / 50);
   pinwheel(0, 0, ocean);
   pop();
   push();
-  translate(width / 2, height / 2);
   rotate(mouseX / 100);
   pinwheel(0, 0, emerald);
   pop();
   push();
-  translate(width / 2, height / 2);
   rotate(mouseX / 50);
   pinwheel(0, 0, lilac);
+  pop();
   pop();
 
   // Pressing the Q key draws triangles randomly between (0,0) and (200,200) with one point being the mouse location
