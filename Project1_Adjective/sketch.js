@@ -46,12 +46,13 @@ function draw() {
     pop();
   }
   
+  // Row of squares that move and scale according to mouseX
   for (var u = 0; u < 6; u++) {
     push();
     stroke(rectCol[u]);
     noFill();
     scale(mouseX/300);
-    rotate(mouseX/300)
+    rotate(mouseX/400)
     rectMode(CENTER);
     rect(375, u * 100 - 50, rectSize[u], rectSize[u]);
     pop();
