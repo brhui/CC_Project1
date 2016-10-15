@@ -5,7 +5,7 @@ var rectX = -50;
 var rectY = 0;
 var speed = 1;
 
-// Color variables for triShape function
+// Color variables for pinwheel function
 var crimson, emerald, lilac, ocean
 
 function setup() {
@@ -21,25 +21,61 @@ function draw() {
 
   // These triangles form a pinwheel of sorts and are a function of triShape and move according to mouseX and mouseY. 
   push();
-    translate(width/2, height/2);
-    rotate(mouseY/100);
-    triShape(0, 0, crimson);
+  translate(width / 2, height / 2);
+  rotate(mouseY / 100);
+  pinwheel(0, 0, crimson);
   pop();
+  push();
+  translate(width / 2, height / 2);
+  rotate(mouseY / 50);
+  pinwheel(0, 0, ocean);
+  pop();
+  push();
+  translate(width / 2, height / 2);
+  rotate(mouseX / 100);
+  pinwheel(0, 0, emerald);
+  pop();
+  push();
+  translate(width / 2, height / 2);
+  rotate(mouseX / 50);
+  pinwheel(0, 0, lilac);
+  pop();
+
+  // Pressing the W key draws a circle at mouse location
+  if (key == 'w' || key == 'W') {
+    stroke(lilac);
+    noFill();
+    ellipse(mouseX, mouseY, 20, 20);
+  }
+  
+  // Pressing the S key draws the third vertex of the triangle at the mouse location
+  if (key == 's' || key == 'S') {
+    stroke(crimson);
+    noFill();
+    triangle(mouseX, mouseY, 20, 20, 20, 40);
+  }
+  
+  // Pressing the A key draws a circle translated 40 to the right and 40 down from the mouse location that also resizes according to where the mouse is.
+  if (key == 'a' || key == 'A') {
+    stroke(ocean);
+    noFill();
     push();
-    translate(width/2, height/2);
-    rotate(mouseY/50);
-    triShape(0, 0, ocean);
-  pop();
-  push();
-    translate(width/2, height/2);
-    rotate(mouseX/100);
-    triShape(0, 0, emerald);
-  pop();
-  push();
-    translate(width/2, height/2);
-    rotate(mouseX/50);
-    triShape(0, 0, lilac);
-  pop();
+    translate(40, 40);
+    ellipse(mouseX, mouseY, mouseX + 1, mouseX + 1);
+    pop();
+  }
+  
+  // Pressing the D key draws a rectangle that rotates around (0,0) and is affected by mouse location.
+  if (key == 'd' || key == 'D') {
+    stroke(emerald);
+    noFill();
+    push();
+    rotate(mouseY/70);
+    rectMode(CENTER);
+    rect(mouseX, mouseY, 100, 100);
+    pop();
+  }
+
 
   // Moving Rectangle from side to side
   rectX += speed;
@@ -58,18 +94,13 @@ function draw() {
   if ((rectX > width) || (rectX < -50)) {
     speed *= -1;
   }
-
-  // When any key is pressed, the background redraws.
-  if (keyIsPressed) {
-    background(255);
-  }
 }
 
-// Function for triangle
-function triShape(triX, triY, triCol) {
-  var x = triX;
-  var y = triY;
+// Function for the pinwheel traigles
+function pinwheel(pinX, pinY, pinCol) {
+  var x = pinX;
+  var y = pinY;
   noStroke();
-  fill(triCol);
+  fill(pinCol);
   triangle(x, y, x + 100, y, x + 50, y + 50);
 }
