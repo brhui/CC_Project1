@@ -142,6 +142,7 @@ function draw() {
     pop();
   }
 
+  // Pressing the E key draws the array shapeSizeE as a series of squares and circles
   if (key == 'e' || key == 'E') {
     for (var t = 0; t < 4; t++) {
       stroke(136, 12, 232);
