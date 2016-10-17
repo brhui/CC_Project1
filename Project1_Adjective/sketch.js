@@ -5,7 +5,7 @@
     w = Make two circle appear (shapes tied to mouse location)
     a = Make a circle and square appear (shapes tied to mouse location)
     s = Makes four triangles appear (one vertex tied to mouse location)
-    d = Makes two squares appear and rotates around (0,0) */
+    d = Makes four squares appear and rotates around (0,0) */
 
 // Square values and speed
 var rectX = -50;
@@ -92,7 +92,8 @@ function draw() {
     noFill();
     ellipse(mouseX, mouseY, mouseX + 1, mouseY + 1);
     push();
-    translate(-100, -150);
+    translate(50, -50);
+    rotate(45)
     ellipse(mouseX, mouseY, mouseX - 1, mouseY - 1);
     pop();
   }
@@ -119,7 +120,7 @@ function draw() {
     pop();
   }
 
-  // Pressing the D key draws two rectangle that rotates around (0,0) and is affected by mouse location.
+  // Pressing the D key draws a series of squares that rotates around (0,0) and is affected by mouse location.
   if (key == 'd' || key == 'D') {
     stroke(emerald);
     noFill();
@@ -128,6 +129,12 @@ function draw() {
     rectMode(CENTER);
     rect(mouseX, mouseY, 100, 100);
     translate(-100, -100)
+    rect(mouseX, mouseY, 100, 100);
+    translate(100, -100)
+    rotate(-30);
+    rect(mouseX, mouseY, 100, 100);
+    translate(100, 100);
+    rotate(-45);
     rect(mouseX, mouseY, 100, 100);
     pop();
   }
