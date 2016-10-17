@@ -25,7 +25,7 @@ var rectSize = [65, 55, 45, 35, 25, 15];
 var rectCol = [245, 215, 185, 155, 125, 95];
 
 //Array for shape values for when the E key is pressed
-var shapeSizeE = [72, 63, 54, 45];
+var shapeSizeE = [72, 63, 54, 45, 36, 27, 18, 9];
 
 function setup() {
   createCanvas(500, 500);
@@ -145,7 +145,7 @@ function draw() {
 
   // Pressing the E key draws the array shapeSizeE as a series of squares and circles
   if (key == 'e' || key == 'E') {
-    for (var t = 0; t < 4; t++) {
+    for (var t = 0; t < 8; t++) {
       stroke(136, 12, 232);
       noFill();
       push();
