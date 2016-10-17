@@ -3,6 +3,7 @@
   CONTROLS:
     q = Make random triangles appear (one vertex tied to mouse location)
     w = Make two circle appear (shapes tied to mouse location)
+    e = Makes an array of shapes that rotates and scales around mouseX and (0,0)
     a = Make a circle and square appear (shapes tied to mouse location)
     s = Makes four triangles appear (one vertex tied to mouse location)
     d = Makes four squares appear and rotates around (0,0) */
