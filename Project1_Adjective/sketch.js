@@ -13,15 +13,18 @@ var rectY = 0;
 var speed = 1;
 
 // Color variables for pinwheel function
-var crimson, emerald, lilac, ocean
+var crimson, emerald, lilac, ocean;
 
-// Array for circle size across the board
+// Arrays for circle size across the board
 var ellipSize = [60, 50, 40, 30, 20, 10];
 var ellipCol = [255, 225, 195, 165, 135, 105];
 
-// Array for square values down the board
+// Arrays for square values down the board
 var rectSize = [65, 55, 45, 35, 25, 15];
 var rectCol = [245, 215, 185, 155, 125, 95];
+
+//Array for shape values for when the E key is pressed
+var shapeSizeE = [72, 63, 54, 45];
 
 function setup() {
   createCanvas(500, 500);
@@ -45,14 +48,14 @@ function draw() {
     ellipse(i * 100 + 50, height / 4, ellipSize[i], ellipSize[i]);
     pop();
   }
-  
+
   // Row of squares that move and scale according to mouseX
   for (var u = 0; u < 6; u++) {
     push();
     stroke(rectCol[u]);
     noFill();
-    scale(mouseX/300);
-    rotate(mouseX/400)
+    scale(mouseX / 300);
+    rotate(mouseX / 400);
     rectMode(CENTER);
     rect(375, u * 100 - 50, rectSize[u], rectSize[u]);
     pop();
@@ -93,7 +96,7 @@ function draw() {
     ellipse(mouseX, mouseY, mouseX + 1, mouseY + 1);
     push();
     translate(50, -50);
-    rotate(45)
+    rotate(45);
     ellipse(mouseX, mouseY, mouseX - 1, mouseY - 1);
     pop();
   }
@@ -103,9 +106,9 @@ function draw() {
     stroke(crimson);
     noFill();
     triangle(mouseX, mouseY, 50, 50, 50, 100);
-    triangle(mouseX, mouseY, 450, 450, 450, 320)
+    triangle(mouseX, mouseY, 450, 450, 450, 320);
     triangle(mouseX, mouseY, 450, 450, 450, 100);
-    triangle(mouseX, mouseY, 50, 50, 50, 320)
+    triangle(mouseX, mouseY, 50, 50, 50, 320);
   }
 
   // Pressing the A key draws a circle and a rectangle translated from the mouse location that also resizes according to where the mouse is.
@@ -128,15 +131,30 @@ function draw() {
     rotate(mouseY / 70);
     rectMode(CENTER);
     rect(mouseX, mouseY, 100, 100);
-    translate(-100, -100)
+    translate(-100, -100);
     rect(mouseX, mouseY, 100, 100);
-    translate(100, -100)
+    translate(100, -100);
     rotate(-30);
     rect(mouseX, mouseY, 100, 100);
     translate(100, 100);
     rotate(-45);
     rect(mouseX, mouseY, 100, 100);
     pop();
+  }
+
+  if (key == 'e' || key == 'E') {
+    for (var t = 0; t < 4; t++) {
+      stroke(136, 12, 232);
+      noFill();
+      push();
+      scale(mouseX/70);
+      rotate(mouseY/500);
+      rectMode(CENTER);
+      rect(100, 100, shapeSizeE[t], shapeSizeE[t]);
+      translate(100, 100);
+      ellipse(100, 100, shapeSizeE[t], shapeSizeE[t]);
+      pop();
+    }
   }
 
   // Moving Rectangle from side to side
@@ -149,7 +167,7 @@ function draw() {
   rect(rectX, rectY, 50, 50);
 
   // Matrix transformation for bottom square
-  translate(0, 450)
+  translate(0, 450);
   rect(rectX, rectY, 50, 50);
 
   // If rectX is greater than the width or less than -50, change direction
